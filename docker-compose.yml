@@ -1,10 +1,18 @@
 version: '2'
 services:
-    rabbitmq:
-        image: rabbitmq:management
-        hostname: rabbitmq
-        ports:
-            - "15672:15672"
-        environment:
-            - RABBITMQ_ERLANG_COOKIE='mysecretpassphrase'
-
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: rabbitmq
+    restart: always
+    ports:
+      - 15672:15672
+    environment:
+      - RABBITMQ_ERLANG_COOKIE='mysecretpassphrase'
+  myredis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./myredis/redis.conf:/etc/redis.conf
