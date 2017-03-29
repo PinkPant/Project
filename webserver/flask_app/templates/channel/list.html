@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% set show_all = "all" in request.path %}
+
+{% block title %}
+    {% if show_all %}
+        List of all chat channels
+    {% else %}
+        {{ current_user.name }}
+        subscriptions
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if current_user.is_admin and show_all %}
+        <p><a href="{{ url_for(".create") }}">Create chat channel</a></p>
+    {% endif %}
+
+    {% if str_set|length %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for channel_name in str_set %}
+                    <tr>
+                        <td>{{ channel_name }}</td>
+                        <td>
+                            <a href="{{ url_for(".chat", channel=channel_name) }}">View channel</a>
+                            {% if current_user.is_admin and show_all %}
+                                <a href="{{ url_for(".delete", name=channel_name) }}">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

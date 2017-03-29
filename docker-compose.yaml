@@ -1,0 +1,34 @@
+version: "2"
+
+services:
+  myredis:
+    image: redis:3.0.7
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./myredis/redis.conf:/etc/redis.conf
+
+  myrabbitmq:
+    image: rabbitmq:3.6.8
+    restart: always
+    ports:
+      - 5672:5672
+    command: rabbitmq-server
+
+  webserver:
+    build: webserver
+    restart: always
+    ports:
+      - 80:80
+    command: ["gunicorn",
+              "-b", ":80",
+              "--worker-class", "eventlet",
+              "-w", "1",
+              "flask_app:app"]
+    links:
+      - myredis
+      - myrabbitmq
+    environment:
+      - DEFAULT_ADMIN=RajaniSaini:COMP351

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}"{{ obj.name }}" chat{% endblock %}
+
+{% block content %}
+    {% if obj.name in current_user.channels %}
+        <a href="#" onclick="$chat.unsubscribe(this);">Unsubscribe</a>
+    {% else %}
+        <a href="#" onclick="$chat.subscribe(this);">Subscribe</a>
+    {% endif %}
+
+    <p><textarea id="wrapper" cols="80" rows="20">{% for message in messages %}{{ message + '\n' }}{% endfor %}</textarea></p>
+    <p><input id="input" size="80" placeholder="Enter your message here"></p>
+{% endblock %}
+
+{% block scripts %}
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+    <script>
+        var URL = 'ws://' + document.domain + ':' + location.port;
+        var $chat = new Chat(URL, io, {
+            textarea: $('#wrapper'),
+            input: $('#input'),
+            room: "{{ obj.name }}",
+            redirect: "{{ url_for('general.home') }}"
+        });
+   </script>
+{% endblock %}

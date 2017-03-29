@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}Create chat channel{% endblock %}
+
+{% block content %}
+    <form action="{{ request.path }}" method="post">
+        {{ form.csrf_token }}
+
+        <p><label for="name">{{ form.name.label }}</label> {{ form.name() }}</p>
+
+        <a href="{{ url_for(".list", show="all") }}">Go back</a>
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

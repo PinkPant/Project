@@ -1,0 +1,13 @@
+Flask==0.12
+
+# Extensions
+Flask-Bcrypt==0.7.1
+Flask-Login==0.4.0
+Flask-Redis==0.3.0
+Flask-WTF==0.14.2
+Flask-SocketIO==2.8.6
+
+# Utils
+gunicorn==19.7.1
+eventlet==0.20.1
+kombu==4.0.2
