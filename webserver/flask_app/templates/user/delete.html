@@ -2,7 +2,7 @@
 {% block title %}Delete user{% endblock %}
 
 {% block content %}
-    <form action="{{ request.path }}" method="post">
+    <form method="post">
         {{ form.csrf_token }}
 
         {{ form.name() }}
@@ -12,3 +12,4 @@
         <button type="submit">Delete</button>
     </form>
 {% endblock %}
+

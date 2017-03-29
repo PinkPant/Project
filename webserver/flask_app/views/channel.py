@@ -1,5 +1,6 @@
 from flask import abort, Blueprint, flash, redirect, request, render_template, url_for
 from flask_login import current_user, login_required
+import random
 
 from flask_app.forms.channel import CreateForm, DeleteForm
 from flask_app.models import Channel
@@ -42,7 +43,7 @@ def create():
     return render_template("channel/upsert.html", form=form)
 
 
-@blueprint.route("/delete/<string:name>", methods=["GET", "POST"])
+@blueprint.route("/delete/<path:name>", methods=["GET", "POST"])
 @login_required
 def delete(name):
     if not current_user.is_admin:
@@ -61,4 +62,15 @@ def delete(name):
 @login_required
 def chat(channel=""):
     channel = Channel.get(channel) or abort(404)
-    return render_template("channel/chat.html", obj=channel, messages=channel.messages)
+    chat_messages = channel.messages
+    colors = {}
+    messages = []
+    for message in chat_messages:
+        data = message.split(":", 1)
+        username = data[0]
+        message = data[1].strip()
+        if username not in colors:
+            colors[username] = "#%06x" % random.randint(0, 0xCCCCCC)
+        messages.append(dict(username=username, message=message))
+    return render_template("channel/chat.html", obj=channel, messages=messages, colors=colors)
+

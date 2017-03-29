@@ -2,14 +2,39 @@
 {% block title %}"{{ obj.name }}" chat{% endblock %}
 
 {% block content %}
-    {% if obj.name in current_user.channels %}
-        <a href="#" onclick="$chat.unsubscribe(this);">Unsubscribe</a>
-    {% else %}
-        <a href="#" onclick="$chat.subscribe(this);">Subscribe</a>
-    {% endif %}
+    <style>
+    #chat {
+        overflow-y: scroll;
+        height: 300px;
+        border: thin solid #CCC;
+    }
+    .chat-message {
+        margin: 0 0 5px;
+    }
+    .chat-message.status {
+        color: red;
+    }
+    #input {
+        width: 100%;
+    }
+    </style>
+    <p>
+        {% if obj.name in current_user.channels %}
+            <button type="button" onclick="$chat.leave(this);">Leave</button>
+        {% else %}
+            <button type="button" onclick="$chat.join(this);">Join</button>
+        {% endif %}
+    </p>
 
-    <p><textarea id="wrapper" cols="80" rows="20">{% for message in messages %}{{ message + '\n' }}{% endfor %}</textarea></p>
-    <p><input id="input" size="80" placeholder="Enter your message here"></p>
+    <div id="chat">
+        {% for data in messages %}
+            <p class="chat-message">
+                <span style="color: {{ colors[data['username']] }};">{{ data['username'] }}</span>:
+                {{ data['message'] }}
+            </p>
+        {% endfor %}
+    </div>
+    <p><input id="input" placeholder="Enter your message here"></p>
 {% endblock %}
 
 {% block scripts %}
@@ -19,10 +44,12 @@
     <script>
         var URL = 'ws://' + document.domain + ':' + location.port;
         var $chat = new Chat(URL, io, {
-            textarea: $('#wrapper'),
+            wrapper: $('#chat'),
+            colors: {{ colors|tojson }},
             input: $('#input'),
             room: "{{ obj.name }}",
             redirect: "{{ url_for('general.home') }}"
         });
    </script>
 {% endblock %}
+

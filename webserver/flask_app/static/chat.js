@@ -1,9 +1,10 @@
 // REQUIRES: jQuery, socket.io
 
 var Chat = function(URL, io, options) {
-    var $textarea = options.textarea,
+    var $wrapper = options.wrapper,
         $input = options.input,
         data = {room: options.room},
+        colors = options.colors,
         redirect = options.redirect;
     
     var socket,
@@ -17,16 +18,20 @@ var Chat = function(URL, io, options) {
             socket.emit('joined', data);
         });
 
-        // User chat status (joined, left, subscribed, unsubscribed)
+        // User chat status (joined, left, subscribed, unsubscribed, error)
         socket.on('status', function(data) {
-            $textarea.val($textarea.val() + '<' + data.msg + '>\n');
-            $textarea.scrollTop($textarea[0].scrollHeight);
+            $wrapper.append($('<p />', {'text': '<' + data.msg + '>', 'class': 'chat-message status'}));
+            $wrapper.scrollTop($wrapper[0].scrollHeight);
         });
 
         // Get message
         socket.on('message', function(data) {
-            $textarea.val($textarea.val() + data.msg + '\n');
-            $textarea.scrollTop($textarea[0].scrollHeight);
+            if (!colors.hasOwnProperty(data.username))
+                colors[data.username] = "#"+((1<<24)*Math.random()|0).toString(16);
+            var $username = $('<span />', {'text': data.username, 'css': {'color': colors[data.username]}});
+            var text = $username[0].outerHTML + ': ' + data.msg;
+            $wrapper.append($('<p />', {'html': text, 'class': 'chat-message'}));
+            $wrapper.scrollTop($wrapper[0].scrollHeight);
         });
 
         // Send message
@@ -41,21 +46,19 @@ var Chat = function(URL, io, options) {
     });
 
     // Add Channel to User's list
-    this.subscribe = function(target) {
-        socket.emit('subscribe', data);
-        $(target).text('Unsubscribe');
+    this.join = function(target) {
+        socket.emit('join', data);
+        $(target).text('Leave');
         $(target).attr('onclick', '');
-        $(target).click(function() {self.unsubscribe(target)});
-        return false;
+        $(target).click(function() {self.leave(target)});
     };
 
     // Remove Channel from User's list
-    this.unsubscribe = function(target) {
-        socket.emit('unsubscribe', data);
-        $(target).text('Subscribe');
+    this.leave = function(target) {
+        socket.emit('leave', data);
+        $(target).text('Join');
         $(target).attr('onclick', '');
-        $(target).click(function(){self.subscribe(target)});
-        return false;
+        $(target).click(function(){self.join(target)});
     };
 
     this.leave_room = function() {
@@ -64,5 +67,5 @@ var Chat = function(URL, io, options) {
             window.location.href = redirect;
         });
     }
-
 };
+

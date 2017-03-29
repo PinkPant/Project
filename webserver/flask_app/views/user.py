@@ -1,5 +1,6 @@
 from flask import abort, Blueprint, flash, redirect, request, render_template, url_for
 from flask_login import current_user, login_required
+import os
 
 from flask_app import bcrypt
 from flask_app.forms.user import CreateForm, DeleteForm, UpdateForm
@@ -59,6 +60,8 @@ def update(name):
 def delete(name):
     if not current_user.is_admin:
         return redirect(url_for(".list"))
+    if name == os.environ["DEFAULT_ADMIN"].split(":")[0]:
+        abort(403)
     user = User.get(name) or abort(404)
     form = DeleteForm(request.form, obj=user)
     if form.validate_on_submit():
@@ -66,3 +69,4 @@ def delete(name):
         flash("User successfully deleted")
         return redirect(url_for(".list"))
     return render_template("user/delete.html", form=form)
+

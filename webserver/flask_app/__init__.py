@@ -14,7 +14,7 @@ app.config.from_object("flask_app.config")
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 redis_store = FlaskRedis(app)
-socketio = SocketIO(app, message_queue=app.config['RABBITMQ_URL'])
+socketio = SocketIO(app)#, message_queue=app.config['RABBITMQ_URL'])
 
 
 @app.before_first_request

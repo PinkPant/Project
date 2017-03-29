@@ -16,10 +16,10 @@ def joined(data):
 def text(data):
     """ Sent by a client when the user entered a new message.
     The message is sent to all people in the room."""
-    msg = current_user.name + ":" + data["msg"]
+    msg = "%s: %s" % (current_user.name, data["msg"])
     channel = Channel.get(data["room"])
     channel.push(msg)
-    emit("message", {"msg": msg}, room=data["room"])
+    emit("message", {"username": current_user.name, "msg": data["msg"]}, room=data["room"])
 
 
 @socketio.on("left")
@@ -30,18 +30,19 @@ def left(data):
     emit("status", {"msg": current_user.name + " has left the channel."}, room=data["room"])
 
 
-@socketio.on("subscribe")
-def subscribe(data):
+@socketio.on("join")
+def join(data):
     current_user.subscribe(data["room"])
-    emit("status", {"msg": current_user.name + " has subscribed to the channel."}, room=data["room"])
+    emit("status", {"msg": current_user.name + " has joined to the channel."}, room=data["room"])
 
 
-@socketio.on("unsubscribe")
-def unsubscribe(data):
+@socketio.on("leave")
+def leave(data):
     current_user.unsubscribe(data["room"])
-    emit("status", {"msg": current_user.name + " has unsubscribed."}, room=data["room"])
+    emit("status", {"msg": current_user.name + " has leave."}, room=data["room"])
 
 
 @socketio.on_error()
 def error_handler(e):
     emit("status", {"msg": "Error: %s" % str(e)})
+

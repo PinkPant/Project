@@ -11,3 +11,4 @@ class CreateForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     name = HiddenField("Name", [DataRequired()])
+
