@@ -30,30 +30,34 @@ Modify the *public_keys_url* parameter to point to your public keys URL, such as
 
 ## Create Stack
 
-Upon logging into CIS OpenStack, click on Orchestration and then Stacks.
+1. Upon logging into CIS OpenStack, click on Orchestration and then Stacks.
 
-Click Launch Stack. Under Template Source, select Direct Input.
+2. Click Launch Stack. Under Template Source, select Direct Input.
+
+3. In the Template Data box, copy and paste the raw contents at the following URL:
+`https://cisgitlab.ufv.ca/201701COMP351AB1g03/project1/raw/master/group03.yaml`
+
+4. Under Environment Source, select Direct Input.
 
 In the Template Data box, copy and paste the raw contents at the following URL:
-https://cisgitlab.ufv.ca/201701COMP351AB1g03/project1/raw/master/group03.yaml
+`https://cisgitlab.ufv.ca/201701COMP351AB1g03/project1/raw/master/group03.env.yaml`
 
-Under Environment Source, select Direct Input.
+5. Click Next.
 
-In the Template Data box, copy and paste the raw contents at the following URL:
-https://cisgitlab.ufv.ca/201701COMP351AB1g03/project1/raw/master/group03.env.yaml
+6. Enter a Stack Name and a password in the password field. Click Launch.
 
-Click Next.
-
-Enter a Stack Name and a password in the password field. Click Launch.
-
-Under Compute, click on Instances. Look for an instance with the same name as the
+7. Under Compute, click Instances. Look for an instance with the same name as the
 stack that was created.
 
-Connect to the instance using SSH and/or select Console under Actions.
+8. Connect to the instance using SSH and/or select Console under Actions.
+
+```bash
+ssh ubuntu@instance_ip
+````
 
 ## Contributions By Team Member:
 
-**Rajani**: Docker, Redis, RabbitMQ chat server and client implementation, Hubot adapter
+**Rajani**: Docker, Redis, RabbitMQ chat server and client implementation, Hubot adapter, documentation
 
 **Cameron**: Moral Support
 
