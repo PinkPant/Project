@@ -2,7 +2,7 @@
 
 ## Contributions by person
 
-Rajani: Docker, RabbitMQ chat server and client implementation, Hubot adapter, Redis
+Rajani: Docker, Redis, RabbitMQ chat server and client implementation, Hubot adapter
 
 Cameron: Moral Support
 
