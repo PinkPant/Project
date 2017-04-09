@@ -24,6 +24,18 @@ Update private key in the `group03.yaml` file starting at line 118, if required:
 The corresponding *public key* stored in `id_ecdsa.pub` should be added as a
 deploy key to the *private* git repository containing the source code.
 
+## Set Up RSA key
+
+Create RSA key.
+
+```bash
+ssh-keygen
+```
+
+Add corresponding *public key* stored in `id_rsa.pub` to:
+1. CIS OpenStack: Access & Security => Key Pairs
+2. CIS GitLab: Profile => SSH Keys
+
 ## Set Up authorized_keys
 
 Modify the *public_keys_url* parameter to point to your public keys URL, such as 
