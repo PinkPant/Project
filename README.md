@@ -38,7 +38,7 @@ Add corresponding *public key* stored in `id_rsa.pub` to:
 
 ## Set Up authorized_keys
 
-Modify the *public_keys_url* parameter to point to your public keys URL, such as 
+Modify the *authkeys_url* parameter in `group03.env.yaml` to point to your public keys URL, such as 
 `https://cisgitlab.ufv.ca/Rajani_Saini.keys`
 
 ## Create Stack
