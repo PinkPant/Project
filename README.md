@@ -11,7 +11,8 @@ This key is specific to one repository/project.
 ssh-keygen -t ecdsa -b 256 -f id_ecdsa
 ```
 
-Update private key in the `group03.yaml` file at line 118: 
+Update private key in the `group03.yaml` file starting at line 118, if required:
+
 ```
 -----BEGIN EC PRIVATE KEY-----
 1
