@@ -2,7 +2,7 @@
 
 ## Instructions:
 
-## Prepare deploy key
+## Prepare Deploy Key
 
 The ecdsa key is preferable to the RSA key because it is shorter.
 This key is specific to one repository/project.
@@ -23,7 +23,7 @@ Update private key in the `group03.yaml` file at line 118:
 The corresponding *public key* stored in `id_ecdsa.pub` should be added as a
 deploy key to the *private* git repository containing the source code.
 
-## Set up authorized_keys
+## Set Up authorized_keys
 
 Modify the *public_keys_url* parameter to point to your public keys URL, such as 
 `https://cisgitlab.ufv.ca/Rajani_Saini.keys`
@@ -51,7 +51,7 @@ stack that was created.
 
 Connect to the instance using SSH and/or select Console under Actions.
 
-## Contributions by person:
+## Contributions By Team Member:
 
 **Rajani**: Docker, Redis, RabbitMQ chat server and client implementation, Hubot adapter
 
