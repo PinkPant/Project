@@ -12,4 +12,4 @@ All of the Python PIP extensions and utilities that need to be installed
 
 ### run.py
 
-Runs the flask_app
+Runs the flask_app, which runs the chat client/server
