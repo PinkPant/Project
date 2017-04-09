@@ -39,17 +39,17 @@ Modify the *public_keys_url* parameter to point to your public keys URL, such as
 
 4. Under Environment Source, select Direct Input.
 
-In the Template Data box, copy and paste the raw contents at the following URL:
+5. In the Template Data box, copy and paste the raw contents at the following URL:
 `https://cisgitlab.ufv.ca/201701COMP351AB1g03/project1/raw/master/group03.env.yaml`
 
-5. Click Next.
+6. Click Next.
 
-6. Enter a Stack Name and a password in the password field. Click Launch.
+7. Enter a Stack Name and a password in the password field. Click Launch.
 
-7. Under Compute, click Instances. Look for an instance with the same name as the
+8. Under Compute, click Instances. Look for an instance with the same name as the
 stack that was created.
 
-8. Connect to the instance using SSH and/or select Console under Actions.
+9. Connect to the instance using SSH and/or select Console under Actions.
 
 ```bash
 ssh ubuntu@instance_ip
