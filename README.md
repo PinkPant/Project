@@ -36,7 +36,7 @@ Add corresponding *public key* stored in `id_rsa.pub` to:
 1. CIS OpenStack: Access & Security => Key Pairs
 2. CIS GitLab: Profile => SSH Keys
 
-## Set Up authorized_keys
+## Set Up authkeys_url
 
 Modify the *authkeys_url* parameter in `group03.env.yaml` to point to your public keys URL, such as 
 `https://cisgitlab.ufv.ca/Rajani_Saini.keys`
