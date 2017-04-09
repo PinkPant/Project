@@ -1,8 +1,8 @@
 # COMP351 Group 03 Project
 
-## Deployment Instructions:
+## Instructions:
 
-### Prepare deploy key
+## Prepare deploy key
 
 The ecdsa key is preferable to the RSA key because it is shorter.
 This key is specific to one repository/project.
