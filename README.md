@@ -29,7 +29,7 @@ deploy key to the *private* git repository containing the source code.
 Create RSA key.
 
 ```bash
-ssh-keygen
+ssh-keygen -t rsa -b 4096
 ```
 
 Add corresponding *public key* stored in `id_rsa.pub` to:
