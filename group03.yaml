@@ -2,21 +2,7 @@
 heat_template_version: 2014-10-16
 
 description: > 
-  heat template for comp351
-
-  It is expected that you not edit this file except to customize the private
-  deploy key, and perhaps to remove the hard-coded line that retrieves
-  janzen.keys.
-
-  Alternatively, you can feel free to continue using your previous templates,
-  as long as the entire project can be deployed using just the heat template
-  and the environment file, without making your repository public.
-
-  IMPORTANT: this template is re-usable *except* for the private key, which
-  would normally be loaded dynamically by the api that deploys the heat template.
-  We are encoding it here directly because loading files into the template is not
-  possible via the web interface. This means that the deploy key is essentially
-  public to anyone who can access this template.
+  HEAT Template for COMP351 Group 03
 
 parameters:
     

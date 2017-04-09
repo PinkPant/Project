@@ -11,8 +11,14 @@ This key is specific to one repository/project.
 ssh-keygen -t ecdsa -b 256 -f id_ecdsa
 ```
 
-Insert private key into the `group03.yaml` file in the appropriate parameter: 
-*deploy_private_key*
+Update private key in the `group03.yaml` file at line 118: 
+```
+-----BEGIN EC PRIVATE KEY-----
+1
+2
+3
+-----END EC PRIVATE KEY-----
+```
 
 The corresponding *public key* stored in `id_ecdsa.pub` should be added as a
 deploy key to the *private* git repository containing the source code.
