@@ -11,7 +11,7 @@ blueprint = Blueprint("general", __name__)
 
 @blueprint.route("/", methods=["GET"])
 def home():
-    return "Hello World!\n", 200
+    return "Group 03's Web Server Says Hello World!\n", 200
 
 
 @blueprint.route("/auth/", methods=["GET"])
