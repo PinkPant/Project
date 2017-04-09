@@ -17,6 +17,13 @@ services:
       - 5672:5672
     command: rabbitmq-server
 
+  myhubot:
+    build: myhubot
+    restart: always
+    ports:
+      - 8080:8080
+    command: ["/hubot/dist/bin/hubot", "-a" , "myadapter"]
+
   webserver:
     build: webserver
     restart: always
@@ -30,5 +37,7 @@ services:
     links:
       - myredis
       - myrabbitmq
+      - myhubot
     environment:
       - DEFAULT_ADMIN=RajaniSaini:COMP351
+

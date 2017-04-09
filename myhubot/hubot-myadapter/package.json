@@ -1,0 +1,26 @@
+{
+  "name": "hubot-myadapter",
+  "version": "1.0.0",
+  "description": "",
+  "author": {
+    "name": "Rajani Saini",
+    "email": "Rajani.Saini@student.ufv.ca"
+  },
+  "main": "src/myadapter.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "parent-require": "^1.0.0",
+    "socket.io": "^1.7.3"
+  },
+  "repository": "",
+  "peerDependencies": {
+    "hubot": ">=2.0"
+  },
+  "devDependencies": {
+    "coffee-script": ">=1.2.0"
+  }
+}
+

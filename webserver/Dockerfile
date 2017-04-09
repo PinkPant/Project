@@ -1,18 +1,14 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
+
+### Utils ###
 RUN apt-get update
-RUN apt-get -y install \
-        python-pip \
-        python-setuptools \
-        build-essential \
-        nodejs \
-        npm
-COPY . /flask_app
-WORKDIR /flask_app
+RUN apt-get install -y python-setuptools
+RUN apt-get install -y build-essential
+RUN apt-get install -y python-pip
+
+### Flask ###
+COPY . /
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN npm install -g coffee-script
-RUN npm install -g yo generator-hubot
-RUN useradd -d /hubot -m -s /bin/bash -U hubot
-USER hubot
-WORKDIR /hubot
-RUN yo hubot --name="group3bot" --defaults
+
 CMD ["/bin/bash"]
