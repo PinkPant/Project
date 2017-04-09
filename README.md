@@ -73,6 +73,19 @@ stack that was created.
 ssh ubuntu@instance_ip
 ````
 
+## Using App
+
+1. Connect to instance IP, using the following URL: `http://instance_ip/auth/?token=RajaniSaini:COMP351`
+2. Ensure you are redirected to `http://instance_ip/user/list/` after logging in.
+3. Click `Add User` to create a new user. 
+4. Enter a username and password twice. Check the `superuser` box if the user is an admin user. Click `Save`.
+5. Click `Chat Channels` to create a new chat channel or room.
+6. Click `View channel` to enter a channel or room.
+7. Click `Join`.
+8. Type messages in chat window.
+9. Open a second web browser window and browse to same URL in step 1 and follow steps 2 through 8.
+10. Chat messages are updated in both browser windows in real-time.
+
 ## Contributions By Team Member:
 
 **Rajani**: Docker, Redis, RabbitMQ chat server and client implementation, Hubot adapter, documentation
