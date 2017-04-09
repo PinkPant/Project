@@ -2,9 +2,7 @@ FROM ubuntu:16.04
 
 ### Utils ###
 RUN apt-get update
-RUN apt-get install -y redis-server
-RUN apt-get install -y nodejs
-RUN apt-get install -y npm
+RUN apt-get install -y redis-server nodejs npm
 
 ### Setup Server ###
 RUN ln -s /usr/bin/nodejs /usr/bin/node
@@ -21,7 +19,7 @@ USER	hubot
 WORKDIR /hubot
 RUN     mkdir dist
 WORKDIR /hubot/dist
-RUN     yo hubot --owner hubot --name myhubot --adapter "shell" --description "Chat Hubot"
+RUN     yo hubot --owner hubot --name myhubot --adapter "shell" --description "Group 3 Hubot"
 USER    root
 RUN     npm link /hubot/hubot-myadapter
 
