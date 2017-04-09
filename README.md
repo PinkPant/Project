@@ -1,6 +1,6 @@
 # COMP351 Group 03 Project
 
-## Contributions by person
+## Contributions by person:
 
 ---
 
