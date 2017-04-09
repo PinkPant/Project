@@ -41,6 +41,11 @@ Add corresponding *public key* stored in `id_rsa.pub` to:
 Modify the *authkeys_url* parameter in `group03.env.yaml` to point to your public keys URL, such as 
 `https://cisgitlab.ufv.ca/Rajani_Saini.keys`
 
+## Set Up ssh_key_name
+
+Modify the *ssh_key_name* parameter in `group03.env.yaml` to reference your OpenStack key name, such as
+`rajani`
+
 ## Create Stack
 
 1. Upon logging into CIS OpenStack, click on Orchestration and then Stacks.
