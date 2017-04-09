@@ -19,7 +19,7 @@ USER	hubot
 WORKDIR /hubot
 RUN     mkdir dist
 WORKDIR /hubot/dist
-RUN     yo hubot --owner hubot --name myhubot --adapter "shell" --description "Group 3 Hubot"
+RUN     yo hubot --owner hubot --name myhubot --adapter "shell" --description "Group 03 Hubot"
 USER    root
 RUN     npm link /hubot/hubot-myadapter
 
