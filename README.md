@@ -25,8 +25,8 @@ deploy key to the *private* git repository containing the source code.
 
 ## Set up authorized_keys
 
-Modify the *public_keys_url* parameter to point to your public keys (works on
-github accounts too), such as https://cisgitlab.ufv.ca/Rajani_Saini.keys
+Modify the *public_keys_url* parameter to point to your public keys URL, such as 
+`https://cisgitlab.ufv.ca/Rajani_Saini.keys`
 
 ## Create Stack
 
