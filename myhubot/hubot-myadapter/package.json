@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "parent-require": "^1.0.0",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "convert-units": "2.2.0"
   },
   "repository": "",
   "peerDependencies": {

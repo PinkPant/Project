@@ -29,9 +29,11 @@ def createsuperuser():
     del os
 
 # Register App Blueprints
-from flask_app.views import channel, general, user
+from flask_app.views import api, channel, general, user
+app.register_blueprint(api.blueprint, url_prefix="/api")
 app.register_blueprint(channel.blueprint, url_prefix="/channel")
 app.register_blueprint(general.blueprint)
 app.register_blueprint(user.blueprint, url_prefix="/user")
 
 import flask_app.events
+

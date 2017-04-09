@@ -2,6 +2,10 @@
 
 This folder contains the following files:
 
+### api.py
+
+Blueprint for user
+
 ### channel.py
 
 Blueprints for channels (create/update/delete)

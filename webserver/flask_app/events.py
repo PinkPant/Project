@@ -8,18 +8,30 @@ from flask_app.models import Channel
 def joined(data):
     """ Sent by clients when they enter a room.
     A status message is broadcast to all people in the room."""
-    join_room(data["room"])
-    emit("status", {"msg": current_user.name + " has entered the channel."}, room=data["room"])
+    room = data["room"]
+    join_room(room)
+    emit("status", {"msg": current_user.name + " has entered the channel."}, room=room)
 
 
 @socketio.on("text")
 def text(data):
     """ Sent by a client when the user entered a new message.
     The message is sent to all people in the room."""
-    msg = "%s: %s" % (current_user.name, data["msg"])
-    channel = Channel.get(data["room"])
-    channel.push(msg)
-    emit("message", {"username": current_user.name, "msg": data["msg"]}, room=data["room"])
+    msg = data["msg"]
+    room = data["room"]
+    username = current_user.name
+    if msg.startswith("myhubot"):
+        emit("hubot_text", data, namespace="/hubot", broadcast=True)
+    else:
+        channel = Channel.get(room)
+        channel.push("%s: %s" % (username, msg))
+    emit("message", {"username": username, "msg": msg}, room=room)
+
+
+@socketio.on("status", namespace="/hubot")
+def status(data):
+    msg = data["msg"]
+    emit("status", {"msg": msg}, room=data["room"], namespace="/")
 
 
 @socketio.on("left")

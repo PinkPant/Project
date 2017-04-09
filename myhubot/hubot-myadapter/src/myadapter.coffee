@@ -1,53 +1,35 @@
 try
-  {Robot,Adapter,TextMessage,User} = require 'hubot'
+  {Robot,Adapter,TextMessage,User} = require "hubot"
 catch
-  prequire = require('parent-require')
-  {Robot,Adapter,TextMessage,User} = prequire 'hubot'
+  prequire = require("parent-require")
+  {Robot,Adapter,TextMessage,User} = prequire "hubot"
 
-port = parseInt process.env.HUBOT_SOCKETIO_PORT or 5000
-
-io = require('socket.io').listen port
-
-if process.env.HEROKU_URL 
-  io.configure ->
-    io.set "transports", ["xhr-polling"]
-    io.set "polling-duration", 10
+socket = require("socket.io-client").connect "ws://webserver:80/hubot"
 
 class Myadapter extends Adapter
-
   constructor: ->
-    @sockets = {}
     super
-    @robot.logger.info "Constructor"
 
-  send: (envelope, strings...) ->
-    socket = @sockets[envelope.id]
-    socket.emit 'message', str for str in strings
-    @robot.logger.info "Send"
+  send: (envelope, answer...) ->
+    socket.emit "status", "msg": "Hubot says: #{answer}", "room": envelope.room
+    @robot.logger.info "Send #{envelope.room}"
 
   reply: (envelope, strings...) ->
-    socket = @sockets[envelope.id]
     for str in strings
-      socket.emit 'message', "#{envelope.name}: #{str}"
+      socket.emit "message", "#{envelope.name}: #{str}"
     @robot.logger.info "Reply"
 
   run: ->
-    io.sockets.on 'connection', (socket) =>
-      @sockets[socket.id] = socket
+    socket.on "connect", =>
+      @robot.logger.info "Connected to socket.io server ID: #{socket.id}"
 
-      socket.on 'message', (message) =>
-        user = @userForId socket.id, name: 'Try Hubot', room: socket.id
-        @receive new TextMessage user, message
-
-      socket.on 'disconnect', =>
-        delete @sockets[socket.id]
-
-    @robot.logger.info "Run bot. Listening websocket port #{port}"
-    @emit "connected"
-    user = new User 1001, name: 'Sample User'
-    message = new TextMessage user, 'Some Sample Message', 'MSG-001'
-    @robot.receive message
-
+      socket.on "hubot_text", (data) =>
+        @robot.logger.info "Got"
+        user = @robot.brain.userForId socket.id, name: "Myhubot", room: data.room
+        message = new TextMessage user, data.msg
+        @robot.logger.info "#{message}"
+        @robot.receive message
+      @emit "connected"
 
 exports.use = (robot) ->
   new Myadapter robot
