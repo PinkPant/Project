@@ -11,6 +11,6 @@ blueprint = Blueprint("api", __name__)
 
 @blueprint.route("/user/<username>", methods=["GET"])
 def user(username):
-    exists = "Exists" if User.get(username) else "Not Exists"
+    exists = True if User.get(username) else False
     return jsonify(exists)
 
