@@ -86,11 +86,12 @@ ssh ubuntu@instance_ip
 9. Open a second web browser window and browse to same URL in step 1 and follow steps 2 through 8.
 10. Replace `?token=RajaniSaini:COMP351` with username and password created in step 4.
 11. Chat messages are updated in both browser windows in real-time.
-12. Hutbot commands
+12. Hutbot commands:
 	* myhubot, user exists Rajani
 	* myhubot, current time
 	* myhubot, my tz
-	* myhubmot, convert
+	* myhubot, convert
+	* myhubot, convert 10000 g to kg
 
 ## Contributions By Team Member:
 
