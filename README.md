@@ -1,5 +1,3 @@
-# COMP351 Group 03 Project
-
 ## Instructions:
 
 ## Prepare Deploy Key
